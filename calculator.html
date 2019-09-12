@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h1>Calculator Functions</h1>
+    <input type="numnber" id="userInput"><br>
+    <div id="output">(Current value)</div><br>
+    <button id="add">+</button>
+    <button id="subtract">-</button>
+    <button id="multiply">*</button>
+    <button id="divide">/</button> <br>
+    <button id="submitButton">Submit</button>
+</body>
+<script>
+    add = (a,b) => Number(a)+Number(b);
+    subtract = (a,b) => Number(a)-Number(b);
+    multiply = (a,b) => Number(a)*Number(b);
+    divide = (a,b) => Number(a)/Number(b);
+
+    //Stores the current input field as the output field when the submit button is clicked
+    document.getElementById("submitButton").addEventListener("click",function () {
+        document.getElementById("output").textContent = document.getElementById("userInput").value;
+    });
+
+    //Adds the new input field (note, this assumes the user has already changed 
+    //the input field) to the output field when "+" is selected
+    document.getElementById("add").addEventListener("click",function () {
+        let initialValue = document.getElementById("output").textContent;
+        let secondValue = document.getElementById("userInput").value;
+        document.getElementById("output").textContent = add(initialValue,secondValue);
+    });
+
+</script>
+</html>
