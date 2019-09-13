@@ -4,13 +4,23 @@
 </head>
 <body>
     <h1>Calculator Functions</h1>
-    <input type="numnber" id="userInput"><br>
-    <div id="output">(Current value)</div><br>
-    <button id="add">+</button>
-    <button id="subtract">-</button>
-    <button id="multiply">*</button>
-    <button id="divide">/</button> <br>
-    <button id="submitButton">Submit</button>
+    <div id="output"></div><br>
+    <button class="operator" id="add">+</button>
+    <button class="operator" id="subtract">-</button>
+    <button class="operator" id="multiply">*</button>
+    <button class="operator" id="divide">/</button> <br>
+    <button class="number" id="six">6</button>
+    <button class="number" id="seven">7</button>
+    <button class="number" id="eight">8</button>
+    <button class="number" id="nine">9</button> <br>
+    <button class="number" id="two">2</button>
+    <button class="number" id="three">3</button>
+    <button class="number" id="four">4</button>
+    <button class="number" id="five">5</button> <br>
+    <button class="number" id="one">1</button>
+    <button class="number" id="zero">0</button><br>
+    <button id="submitButton">=</button>
+    <button id="clearButton">Clear</button>
 </body>
 <script>
     add = (a,b) => Number(a)+Number(b);
@@ -18,18 +28,38 @@
     multiply = (a,b) => Number(a)*Number(b);
     divide = (a,b) => Number(a)/Number(b);
 
-    //Stores the current input field as the output field when the submit button is clicked
-    document.getElementById("submitButton").addEventListener("click",function () {
-        document.getElementById("output").textContent = document.getElementById("userInput").value;
-    });
+    function operator (a,b,operatorFunction) {
+        return operatorFunction(a,b);
+    }
 
-    //Adds the new input field (note, this assumes the user has already changed 
-    //the input field) to the output field when "+" is selected
-    document.getElementById("add").addEventListener("click",function () {
-        let initialValue = document.getElementById("output").textContent;
-        let secondValue = document.getElementById("userInput").value;
-        document.getElementById("output").textContent = add(initialValue,secondValue);
-    });
+    //Displays the value of the number selected based on the user clicking on the numbered buttons
+    let numbers = document.querySelectorAll(".number");
+    numbers.forEach((number) => {
+        number.addEventListener("click", (e) => {
+            let currentValue = document.getElementById("output").textContent;
+            document.getElementById("output").textContent = currentValue + number.textContent;
+        })
+    })
+
+
+    //I'M DOUBTFUL OF THE FOLLOWING LOGIC. AT A MINIMUM I THINK YOU WOULD NEED TO REMOVE AN EVENT LISTENER BEFORE ADDING A SECOND EVENT LISTENER TO THE NUMBER BUTTONS
+    let operators = document.querySelectorAll(".operator");
+    operators.forEach((operator) => {
+        operator.addEventListener("click", (e) => {
+            let operatSelect = operator.id;
+            let initialNum = document.getElementById("output").textContent;
+            //inner event listners for the second number selected
+            
+            let numbers = document.querySelectorAll(".number");
+            let secondNum = numbers.forEach((number) => {
+                number.addEventListener("click", (e) => {
+                    let currentValue = document.getElementById("output").textContent;
+                    document.getElementById("output").textContent = currentValue + number.textContent;
+                })
+            })
+        })
+    })
+    
 
 </script>
 </html>
