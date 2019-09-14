@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Calculator Functions</h1>
-    <div id="output">0</div><br>
-    <button class="operator" id="add">+</button>
-    <button class="operator" id="subtract">-</button>
-    <button class="operator" id="multiply">*</button>
-    <button class="operator" id="divide">/</button> <br>
-    <button class="number" id="six">6</button>
-    <button class="number" id="seven">7</button>
-    <button class="number" id="eight">8</button>
-    <button class="number" id="nine">9</button> <br>
-    <button class="number" id="two">2</button>
-    <button class="number" id="three">3</button>
-    <button class="number" id="four">4</button>
-    <button class="number" id="five">5</button> <br>
-    <button class="number" id="one">1</button>
-    <button class="number" id="zero">0</button><br>
-    <button id="submitButton">=</button>
-    <button id="clearButton">Clear</button>
+    <div id="wrapper">
+        <h1>Calculator Functions</h1>
+        <div id="output">0</div><br>
+        <button class="operator" id="add">+</button>
+        <button class="operator" id="subtract">-</button>
+        <button class="operator" id="multiply">*</button>
+        <button class="operator" id="divide">/</button> <br>
+        <button class="number" id="six">6</button>
+        <button class="number" id="seven">7</button>
+        <button class="number" id="eight">8</button>
+        <button class="number" id="nine">9</button> <br>
+        <button class="number" id="two">2</button>
+        <button class="number" id="three">3</button>
+        <button class="number" id="four">4</button>
+        <button class="number" id="five">5</button> <br>
+        <button class="number" id="one">1</button>
+        <button class="number" id="zero">0</button><br>
+        <button id="submitButton">=</button>
+        <button id="clearButton">C</button>
+    </div>
 </body>
 <script>
-    /*
-    add = (a,b) => Number(a)+Number(b);
-    subtract = (a,b) => Number(a)-Number(b);
-    multiply = (a,b) => Number(a)*Number(b);
-    divide = (a,b) => Number(a)/Number(b);
-    */
-
 
     let operatorObject = {
         add: (a,b) => Number(a)+Number(b),
@@ -46,6 +42,7 @@
     let valueB;
     let valueSelect = "A";
     let operatorSelect;
+    let finalValue;
 
     //Displays the value of the number selected based on the user clicking on the numbered buttons
     let numbers = document.querySelectorAll(".number");
@@ -65,9 +62,21 @@
                 if (currentValue == 0) {
                     document.getElementById("output").textContent = number.textContent;
                     valueB = number.textContent;
+                    if (valueB == 0 && operatorSelect == "divide") {
+                        document.getElementById("output").textContent = "Error, invalid operation!"
+                    } else {
+                        finalValue = operator (valueA,valueB,operatorSelect);
+                        valueA = finalValue;
+                    }
                 } else {
                     document.getElementById("output").textContent = currentValue + number.textContent;
                     valueB = currentValue + number.textContent;
+                    if (valueB == 0 && operatorSelect == "divide") {
+                        document.getElementById("output").textContent = "Error, invalid operation!"
+                    } else {
+                        finalValue = operator (valueA,valueB,operatorSelect);
+                        valueA = finalValue;
+                    }
                 }
             }
         })
@@ -86,14 +95,24 @@
 
     //add event listener to the equals button to calculate and display the final value based on the operation and values selected
     document.getElementById("submitButton").addEventListener("click", (e) => {
-        let finalValue = operator (valueA,valueB,operatorSelect);
-        document.getElementById("output").textContent = finalValue;
+        if (finalValue) {
+            document.getElementById("output").textContent = finalValue.toFixed(2);
+        } else if (operatorSelect) {
+            document.getElementById("output").textContent = "Error";
+        } else if (valueA) {
+            document.getElementById("output").textContent = valueA;
+        } else {
+            document.getElementById("output").textContent = 0;
+        }
     })
 
-    //add event listener to the equals button
+    //add event listener to the clear button
     document.getElementById("clearButton").addEventListener("click", (e) => {
         document.getElementById("output").textContent = 0;
         valueSelect = "A";
+        finalValue = undefined;
+        valueA = undefined;
+        valueB = undefined;
     })
     
 

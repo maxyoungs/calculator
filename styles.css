@@ -1,0 +1,41 @@
+.operator {
+    background-color: #d2f5fc;
+}
+
+button {
+    padding: 3px;
+    margin: 5px;
+    height: 25px;
+    width: 25px;
+    border: solid;
+    border-color: #919191;
+    border-width: 1px;
+    background-color: white;
+}
+
+#output {
+    padding: 5px;
+    margin: 5px;
+    height: 15px;
+    width: 150px;
+    background-color: white;
+    border: solid;
+    border-color: #919191;
+    border-width: 1px;
+}
+
+#wrapper {
+    border: solid;
+    border-color: #919191;
+    background-color: #f0f0f0;
+    border-width: 2px;
+    width: 300px;
+    padding: 20px;
+}
+
+h1 {
+    padding: 5px;
+    margin: 5px;
+    font-size: 30px
+}
+
